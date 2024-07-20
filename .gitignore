@@ -1,0 +1,6 @@
+venv/*
+__pycahe__/*
+error.log
+__pycache__/
+.env
+token/*
