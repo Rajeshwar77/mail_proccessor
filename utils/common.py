@@ -2,6 +2,7 @@ import logging
 import re
 # Configure logging
 logging.basicConfig(level=logging.ERROR, filename='error.log')
+logging.basicConfig(level=logging.INFO, filename='info.log')
 
 def log_error(message, exception):
     logging.error(f"{message}: {exception}")

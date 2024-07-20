@@ -52,7 +52,7 @@ def store_emails(emails, batch_size=30):
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        query = "INSERT INTO emails (user_id, message_id, sender, receiver, subject, message, received_at, history_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO emails (user_id, message_id, sender, receiver, subject, message, received_at, history_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (message_id) DO NOTHING"
         batch = []
 
         for email in emails:

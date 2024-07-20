@@ -7,7 +7,19 @@ class Email:
         self.message = message
         self.received_at = received_at
         self.message_id = message_id
-        self.history_id = history_id    
+        self.history_id = history_id
+    
+    def to_dict(self):
+        return {
+            "user_id": self.user_id,
+            "sender": self.sender,
+            "receiver": self.receiver,
+            "subject": self.subject,
+            "message": self.message,
+            "received_at": self.received_at,
+            "message_id": self.message_id,
+            "history_id": self.history_id
+        }    
 
 class OAuthCredentials:
     def __init__(self, email, provider, client_id, project_id, client_secret):

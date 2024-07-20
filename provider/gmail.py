@@ -12,7 +12,7 @@ from googleapiclient.errors import HttpError
 from utils.config import config
 from utils.store import fetch_credentials, store_credentials, store_emails, select_email_asread
 from utils.models import Email
-from utils.common import log_error, extract_email
+from utils.common import log_error, extract_email, log_info
 from dateutil.parser import parser
 
 parser_instance = parser()
@@ -86,6 +86,7 @@ class GmailProvider:
         history_id = msg['historyId']
         
         email = Email(user_id, sender, receiver, subject, message, received_at, message_id, history_id)
+        log_info(f"Processed email: {email.to_dict()}")
         return email
     
     def fetch_store_emails(self):
@@ -103,14 +104,7 @@ class GmailProvider:
                     msg = self.fetch_email_details(message['id'])
                     email = self.process_email_message(msg)
                     email_data.append(email)
-                # with ThreadPoolExecutor(max_workers=2) as executor:
-                #     future_to_email = {executor.submit(self.fetch_and_process_email, message['id']): message for message in messages}
-
-                #     for future in as_completed(future_to_email):
-                #         email = future.result()
-                #         if email:  # Ensure email is not None
-                #             email_data.append(email)
-
+            
                 if not next_page_token:
                     break
 

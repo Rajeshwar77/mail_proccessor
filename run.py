@@ -30,6 +30,7 @@ if __name__ == "__main__":
 
         provider = get_email_provider(provider_name, email)
         email_data = provider.fetch_store_emails()
+        # provider.mark_as_read()
     except ImportError as e:
         log_error("Error: Missing required modules. Please ensure all dependencies are installed.", e)
         sys.exit(1)
